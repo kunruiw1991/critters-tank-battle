@@ -123,4 +123,5 @@ body.solo #touch .left .fire, body.solo #touch .right .pad { display: none; }
 body.portrait #main { flex-direction: column; justify-content: flex-start; }
 body.portrait #hud { width: auto; flex-direction: row; flex-wrap: wrap; align-self: stretch; justify-content: center; }
 body.portrait #hud .hsec:first-child { width: 100%; }
-body.portrait #enemyIcons { grid-template-columns: repeat(10, 1fr); }
+body.portrait #enemyIcons { grid-template-columns: repeat(10, 30px); justify-content: center; }
+body.portrait #enemyIcons img { width: 30px; height: 30px; }

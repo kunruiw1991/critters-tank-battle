@@ -796,7 +796,7 @@ function render() {
   });
   ctx.font = '8px "Press Start 2P", monospace'; ctx.textAlign = 'center';
   S.popups.forEach((p) => { ctx.fillStyle = '#000'; ctx.fillText(p.text, p.x + 1, p.y + 1); ctx.fillStyle = '#fff'; ctx.fillText(p.text, p.x, p.y); });
-  if (S.overT > 0) {
+  if (S.overT > 0 && S.mode === 'play') {
     const k = Math.min(1, S.overT / 2.2), yy = FIELD + 20 - k * (FIELD / 2 + 20);
     ctx.font = '16px "Press Start 2P", monospace';
     ctx.fillStyle = '#000'; ctx.fillText('GAME', FIELD / 2 + 2, yy + 2); ctx.fillText('OVER', FIELD / 2 + 2, yy + 24);
@@ -836,7 +836,7 @@ function renderHud() {
   $('hiScore').textContent = S.hi;
 }
 function showTally() {
-  S.mode = 'tally'; Sound.play('clear');
+  S.mode = 'tally'; Sound.play('clear'); $('toast').classList.add('hidden');
   const two = S.players === 2;
   const rows = KINDS.map((k) => `<span class="n">${(S.kills[0][k] || 0)} × ${KIND[k].pts}</span><img src="icons/${k}.jpg" alt=""><span class="n">${two ? `${S.kills[1][k] || 0} × ${KIND[k].pts}` : ''}</span>`).join('');
   const total = (i) => KINDS.reduce((a, k) => a + (S.kills[i][k] || 0), 0);
@@ -950,7 +950,7 @@ addEventListener('resize', layout);
 window.__TANK__ = {
   S, update, step: (n) => { for (let i = 0; i < n; i++) update(DT); }, newGame, startStage, goTitle,
   enemies: () => S.tanks.filter((t) => t.team === 1).length,
-  pop: (kind) => { const t = S.tanks.find((x) => x.team === 1 && x.spawnT <= 0 && (!kind || x.kind === kind)); if (t) enemyPop(t, S.p[0]); return !!t; },
+  pop: (kind) => { const t = S.tanks.find((x) => x.team === 1 && !x.gone && x.spawnT <= 0 && (!kind || x.kind === kind)); if (t) enemyPop(t, S.p[0]); return !!t; },
   forcePower: (kind) => { spawnPower(); if (S.power && kind) S.power.kind = kind; return S.power; },
   grab: () => { if (S.power && S.p[0]) { S.p[0].x = S.power.x; S.p[0].y = S.power.y; } },
   gridCount: (v) => S.grid.reduce((a, x) => a + (x === v ? 1 : 0), 0)
