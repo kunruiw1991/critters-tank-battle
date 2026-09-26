@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Critter Tank Battle · 坦克大战</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+  <header id="topbar">
+    <div class="brand">
+      <img src="icons/mikey.jpg" alt="Mikey"><img src="icons/jj.jpg" alt="JJ">
+      <div><b>CRITTER TANK BATTLE</b><span>坦克大战</span></div>
+    </div>
+    <div class="btns">
+      <button id="startBtn" class="pill go">▶ Start</button>
+      <button id="pauseBtn" class="round" title="Pause">⏸</button>
+      <button id="stopBtn" class="round" title="Stop">⏹</button>
+      <button id="musicBtn" class="round" title="Music">🎵</button>
+      <button id="soundBtn" class="round" title="Sound">🔊</button>
+    </div>
+  </header>
+
+  <main id="main">
+    <div id="frame">
+      <canvas id="field" width="416" height="416"></canvas>
+
+      <section id="title" class="ov">
+        <h1 class="logo"><span>CRITTER</span><span>TANK BATTLE</span></h1>
+        <div class="zh">坦克大战</div>
+        <div class="cast">
+          <div class="side heroes"><img src="icons/mikey.jpg" alt="Mikey"><img src="icons/jj.jpg" alt="JJ"></div>
+          <div class="vs">VS</div>
+          <div class="side villains"><img src="icons/huggy.jpg" alt=""><img src="icons/mommy.jpg" alt=""><img src="icons/bunzo.jpg" alt=""><img src="icons/pj.jpg" alt=""></div>
+        </div>
+        <div id="menu">
+          <button class="mi sel" data-a="1p"><i>▶</i>1 PLAYER · MIKEY</button>
+          <button class="mi" data-a="2p"><i>▶</i>2 PLAYERS · MIKEY + JJ</button>
+          <button class="mi" data-a="build"><i>▶</i>CONSTRUCTION</button>
+        </div>
+        <div class="speed" id="speedRow">
+          <button data-d="super" class="chip sel">🐌 Super Gentle</button>
+          <button data-d="gentle" class="chip">🐢 Gentle</button>
+          <button data-d="classic" class="chip">🐇 Classic</button>
+        </div>
+        <div class="hi">HI-SCORE <b id="hiScore">0</b></div>
+        <div class="keys">Mikey: WASD + Space · JJ: Arrows + Enter</div>
+      </section>
+
+      <section id="intro" class="ov hidden"><div class="stg">STAGE <b id="introNum">1</b></div><div id="introName" class="stgname"></div></section>
+      <section id="tally" class="ov hidden"></section>
+      <section id="over" class="ov hidden"></section>
+      <section id="pauseVeil" class="ov hidden"><div class="paused">PAUSE</div><button id="resumeBtn" class="pill go">▶ Keep playing</button></section>
+      <div id="toast" class="hidden"></div>
+
+      <div id="palette" class="hidden">
+        <div class="brushes">
+          <button data-b="1" class="sel"><i class="sw brick"></i>Brick</button>
+          <button data-b="2"><i class="sw steel"></i>Steel</button>
+          <button data-b="3"><i class="sw water"></i>Water</button>
+          <button data-b="4"><i class="sw tree"></i>Trees</button>
+          <button data-b="5"><i class="sw ice"></i>Ice</button>
+          <button data-b="0"><i class="sw erase"></i>Erase</button>
+        </div>
+        <div class="acts">
+          <button id="buildPlay" class="pill go">▶ Play my map</button>
+          <button id="buildClear" class="pill">Clear</button>
+        </div>
+      </div>
+    </div>
+
+    <aside id="hud">
+      <div class="hsec"><div class="hlabel">VILLAINS LEFT</div><div id="enemyIcons"></div></div>
+      <div class="hsec player" id="p1card"><img src="icons/mikey.jpg" alt=""><div><b>MIKEY</b><span class="lv" id="p1lives">♥ 3</span><span id="p1score">0</span><span class="stars" id="p1level"></span></div></div>
+      <div class="hsec player" id="p2card"><img src="icons/jj.jpg" alt=""><div><b>JJ</b><span class="lv" id="p2lives">♥ 3</span><span id="p2score">0</span><span class="stars" id="p2level"></span></div></div>
+      <div class="hsec"><div class="hlabel">CRITTER HOME</div><div id="homeHearts"></div></div>
+      <div class="hsec flag"><span class="fl">🚩</span><b id="stageNum">1</b></div>
+    </aside>
+  </main>
+
+  <div id="touch" class="hidden">
+    <div class="ctl left"><div class="pad" data-p="0"><span>▲</span><span>▶</span><span>▼</span><span>◀</span></div><button class="fire" data-p="0">FIRE</button></div>
+    <div class="ctl right"><button class="fire" data-p="1">FIRE</button><div class="pad" data-p="1"><span>▲</span><span>▶</span><span>▼</span><span>◀</span></div></div>
+  </div>
+</div>
+<script src="js/game.js"></script>
+</body>
+</html>
